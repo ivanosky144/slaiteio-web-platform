@@ -36,7 +36,7 @@ export default function SchedulesCreate() {
             <input type="text" placeholder='Add title' className='outline-none text-4xl font-semibold'/>
             <hr></hr>  
             <span 
-              className='text-left font-bold text-white bg-[#008080] w-[10vw] p-2 rounded-md flex items-center gap-5 cursor-pointer mt-5'
+              className='text-left font-bold text-white bg-[#008080] w-[10vw] p-2 rounded-md flex items-center gap-5 cursor-pointer mt-5  hover:scale-105'
               onClick={()=>setOpenActivityTypeOptions(!openActivityTypeOptions)}
             >
               <FaPlus className='text-white font-bold'/>

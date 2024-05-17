@@ -11,7 +11,7 @@ interface ActivityData {
 export default function ActivityCard({ id, type, metadata } : ActivityData) {
 
     return (
-        <div className='p-2 rounded-xl border-4 border-gray-500' key={id}>
+        <div className='p-2 rounded-xl border-4 border-gray-500 hover:scale-105 cursor-pointer hover:border-gray-400' key={id}>
             {type === 'TASK' ? (
             <p className='flex items-center gap-2'>
                 <FaTasks className='text-gray-600'/>

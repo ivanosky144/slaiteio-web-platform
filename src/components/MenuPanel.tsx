@@ -8,7 +8,7 @@ export default function MenuPanel() {
             <div className='flex flex-col'>
                 <h1 className='text-[#008080]    font-bold text-4xl'>SLAITE.IO</h1>
                 <p className='mt-20 mb-5 font-bold text-lg text-gray-600'>MENU</p>
-                <div className="flex items-center bg-[#008080] p-5 rounded-xl gap-5 mb-10">
+                <div className="flex items-center bg-[#008080] p-5 rounded-xl gap-5 mb-10 hover:scale-105 cursor-pointer">
                     <FaCalendarAlt className='text-white w-5 h-5'/>
                     <p className='text-white font-semibold text-xl'>All Schedules</p>
                 </div>

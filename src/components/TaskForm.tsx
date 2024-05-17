@@ -10,8 +10,8 @@ export default function TaskForm() {
                 <input type="date" className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'/>
             </div>
             <div className='flex justify-between p-4'>
-                <button className='bg-red-800 p-2 font-bold text-white rounded-xl'>Clear Task</button>
-                <button className='bg-yellow-800 p-2 font-bold text-white rounded-xl'>Save Changes</button>
+                <button className='bg-red-800 px-3 py-2 font-bold text-white rounded-xl hover:scale-105 hover:bg-red-700'>Clear Task</button>
+                <button className='bg-yellow-800 px-3 py-2 font-bold text-white rounded-xl hover:scale-105 hover:bg-yellow-700'>Save Changes</button>
             </div>
         </form>
     )
