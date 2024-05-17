@@ -1,10 +1,16 @@
 import 'tailwindcss/tailwind.css';
 import 'tailwind-scrollbar';
+import { useState, useMemo } from 'react';
+
 import MenuPanel from '@/components/MenuPanel';
+import ActivityCard from '@/components/ActivityCard';
+import TaskForm from '@/components/TaskForm';
+import EventForm from '@/components/EventForm';
+
 import { FaPlus } from "react-icons/fa";
 import { FaTasks } from "react-icons/fa"; 
 import { FaNoteSticky } from "react-icons/fa6";
-import { useState, useMemo } from 'react';
+import dummyData from '@/data/dummyData';
 
 export default function SchedulesCreate() {
   const [openActivityTypeOptions, setOpenActivityTypeOptions] = useState<boolean>(false);
@@ -18,6 +24,7 @@ export default function SchedulesCreate() {
       setOpenForm("");
     }
   }
+
 
 
   return (
@@ -48,27 +55,17 @@ export default function SchedulesCreate() {
                   </div>
               )}
               <hr></hr>
+              <div className='flex flex-col gap-4'>
+                {dummyData?.map((data) => (
+                  <ActivityCard id={data.id} type={data.type} metadata={data.metadata}/>
+                ))}
+              </div>
           </form>
           {openForm === "TASK" && (
-            <form className='flex-2 bg-slate-100 p-3 rounded-md ml-10 w-[30vw] opacity-50 flex flex-col justify-between'>
-              <div className="flex flex-col gap-5">
-                <h2 className='font-bold text-xl'>Task: </h2>
-                <input type="text" placeholder='Add task name' className='bg-slate-200 p-3 rounded-xl outline-none font-semibold text-black'/>
-                <textarea placeholder='Add task detail' className='bg-slate-200 p-3 rounded-xl outline-none font-semibold text-black h-32'/>
-                <div></div>
-              </div>
-              <div className='flex justify-between p-4'>
-                <button className='bg-red-800 p-2 font-bold text-white rounded-xl'>Clear Task</button>
-                <button className='bg-yellow-800 p-2 font-bold text-white rounded-xl'>Save Changes</button>
-              </div>
-            </form>
+            <TaskForm />
           )}
           {openForm === "EVENT" && (
-            <form className='flex-2 bg-slate-100 p-3 rounded-md ml-10 w-[30vw] opacity-50 flex flex-col gap-5'>
-              <h2 className='font-bold text-xl'>Event: </h2>
-              <input type="text" placeholder='Add event title' className='bg-slate-200 p-3 rounded-xl outline-none font-semibold text-black'/>
-              <textarea placeholder='Add description' className='bg-slate-200 p-3 rounded-xl outline-none font-semibold text-black h-32'/>
-            </form>
+            <EventForm />
           )}
 
         </div>
