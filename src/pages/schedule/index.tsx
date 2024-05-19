@@ -21,10 +21,10 @@ export default function Schedules() {
         </button>
       </div>
       <div className="flex-grow max-h-[100vh] overflow-auto px-10 py-20">
-        {/* <FullCalendar 
+        <FullCalendar 
           plugins={[ dayGridPlugin ]}
           initialView="dayGridMonth"
-        /> */}
+        />
       </div>
     </div>
   )
