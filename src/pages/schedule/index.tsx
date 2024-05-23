@@ -24,6 +24,7 @@ export default function Schedules() {
         <FullCalendar 
           plugins={[ dayGridPlugin ]}
           initialView="dayGridMonth"
+
         />
       </div>
     </div>
