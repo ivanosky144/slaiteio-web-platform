@@ -9,15 +9,17 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
 
     const [name, setName] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
-    const [time, setTime] = useState<string>("");
+    const [time, setTime] = useState<string>("00:00");
+    const [date, setDate] = useState<string>("");
 
     const handleSave = () => {
         const newTask = {
+            date: date,
             type: 'TASK',
             metadata: {
-                name,
-                detail,
-                time 
+                name: name,
+                detail: detail,
+                due_time: time 
             }
         }
         onAddActivity(newTask);
@@ -43,8 +45,14 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
                     className='bg-slate-100 p-3 rounded-xl outline-none font-semibold text-black h-32'
                     onChange={(e) => setDetail(e.target.value)}
                 />
+                <input
+                    type="date"
+                    value={date}
+                    className='bg-slate-100 font-semibold text-black h-18 p-2 outline-none'
+                    onChange={(e) => setDate(e.target.value)}
+                />
                 <input 
-                    type="date" 
+                    type="time" 
                     value={time}
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
                     onChange={(e) => setTime(e.target.value)}

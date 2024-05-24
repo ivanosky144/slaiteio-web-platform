@@ -40,7 +40,7 @@ export default function ScheduleForm({ submitHandler}: ScheduleFormProps) {
             activities: activities
         }
 
-        await createSchedule(payload)
+        submitHandler(payload)
     }
 
     return (

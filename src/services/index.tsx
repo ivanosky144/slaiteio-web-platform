@@ -2,7 +2,7 @@ const API_SLAITEIO = process.env.NEXT_PUBLIC_SLAITEIO_API
 
 function getToken() {
     if (typeof window !== 'undefined') {
-        return window.localStorage.getItem('TOKEN')
+        return window.localStorage.getItem('token')
     }
 }
 

@@ -9,14 +9,19 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [time, setTime] = useState<string>("");
+    const [startTime, setStartTime] = useState<string>("00:00");
+    const [endTime, setEndTime] = useState<string>("00:00");
+    const [date, setDate] = useState<string>("");
 
     const handleSave = () => {
         const newEvent = {
+            date: date,
             type: 'EVENT',
             metadata: {
-                title,
-                description
+                title: title,
+                description: description,
+                start_time: startTime,
+                end_time: endTime
             }
         }
         onAddActivity(newEvent);
@@ -37,10 +42,24 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
                     className='bg-slate-100 p-3 rounded-xl outline-none font-semibold text-black h-32'
                     onChange={(e) => setDescription(e.target.value)}
                 />
+                <input
+                    type="date"
+                    value={date}
+                    className='bg-slate-100 font-semibold text-black h-18 p-2 outline-none'
+                    onChange={(e) => setDate(e.target.value)}
+                />
                 <input 
-                    type="date" 
+                    type="time" 
+                    value={startTime}
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
-                    onChange={(e) => setTime(e.target.value)}/>
+                    onChange={(e) => setStartTime(e.target.value)}
+                />
+                <input 
+                    type="time" 
+                    value={endTime}
+                    className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
+                    onChange={(e) => setEndTime(e.target.value)}
+                />
             </div>
             <div className='flex justify-between p-4'>
                 <button 
@@ -48,7 +67,8 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
                     onClick={() => {
                         setTitle("");
                         setDescription("");
-                        setTime("");
+                        setStartTime("");
+                        setEndTime("");
                 }}>
                     Clear Event
                 </button>
