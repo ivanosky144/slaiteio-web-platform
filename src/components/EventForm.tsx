@@ -12,11 +12,13 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
     const [startTime, setStartTime] = useState<string>("00:00");
     const [endTime, setEndTime] = useState<string>("00:00");
     const [date, setDate] = useState<string>("");
+    const [repeatInterval, setRepeatInterval] = useState<string>("");
 
     const handleSave = () => {
         const newEvent = {
             date: date,
             type: 'EVENT',
+            repeat_interval: repeatInterval,
             metadata: {
                 title: title,
                 description: description,
@@ -60,6 +62,16 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
                     onChange={(e) => setEndTime(e.target.value)}
                 />
+                <select
+                    value={repeatInterval}
+                    className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
+                    onChange={(e) => setRepeatInterval(e.target.value)}
+                >
+                    <option value="None" className='bg-slate-100 font-semibold'>Does not repeat</option>
+                    <option value="Daily">Every day</option>
+                    <option value="Weekly">Every week</option>
+                    <option value="Monthly">Every month</option>
+                </select>
             </div>
             <div className='flex justify-between p-4'>
                 <button 

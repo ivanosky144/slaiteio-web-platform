@@ -11,11 +11,13 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
     const [detail, setDetail] = useState<string>("");
     const [time, setTime] = useState<string>("00:00");
     const [date, setDate] = useState<string>("");
+    const [repeatInterval, setRepeatInterval] = useState<string>("");
 
     const handleSave = () => {
         const newTask = {
             date: date,
             type: 'TASK',
+            repeat_interval: repeatInterval,
             metadata: {
                 name: name,
                 detail: detail,
@@ -57,6 +59,16 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
                     onChange={(e) => setTime(e.target.value)}
                 />
+                <select
+                    value={repeatInterval}
+                    className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
+                    onChange={(e) => setRepeatInterval(e.target.value)}
+                >
+                    <option value="None" className='bg-slate-100 font-semibold'>Does not repeat</option>
+                    <option value="Daily">Every day</option>
+                    <option value="Weekly">Every week</option>
+                    <option value="Monthly">Every month</option>
+                </select>
             </div>
             <div className='flex justify-between p-4'>
                 <button 

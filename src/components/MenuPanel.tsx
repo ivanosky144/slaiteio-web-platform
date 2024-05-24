@@ -11,6 +11,7 @@ export default function MenuPanel() {
     const [schedules, setSchedules] = useState<any>(null);
     const user = useAuthStore((state) => state.user);
     const router = useRouter();
+    const schedule_id = router.query.id;
 
     const getData = async () => {
         const response = await getSchedulesByUser('test12345@gmail.com');
@@ -37,7 +38,9 @@ export default function MenuPanel() {
                         <>
                             {schedules?.data?.map((schedule: any) => (
                                 <div 
-                                    className="bg-[#00b3b3] p-3 rounded-lg flex items-center gap-5 hover:scale-105 cursor-pointer" 
+                                    className={`p-3 rounded-lg flex bg-[#00b3b3] items-center gap-5 hover:scale-105 hover:opacity-50 cursor-pointer ${
+                                        schedule.id === Number(schedule_id) ? "opacity-50" : "opacity-100"
+                                      }`}
                                     key={schedule.id}
                                     onClick={() => router.push(`/schedule/${schedule.id}`)}
                                 >

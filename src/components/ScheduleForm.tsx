@@ -6,8 +6,6 @@ import { FaPlus, FaTasks } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
 import dummyData from '@/data/dummyData';
 import { useState } from 'react';
-import { createSchedule } from '@/services';
-
 
 interface ScheduleFormProps {
     submitHandler: (payload: any) => void
@@ -45,7 +43,7 @@ export default function ScheduleForm({ submitHandler}: ScheduleFormProps) {
 
     return (
         <form className="p-10 rounded-xl shadow-2xl w-[50vw] flex" onSubmit={handleSubmit}>
-            <div className='flex flex-col gap-5 flex-3'>
+            <div className='flex flex-col gap-5 flex-3 overflow-y'>
                 <input 
                     type="text" 
                     placeholder='Add title' 
