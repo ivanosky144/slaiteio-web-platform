@@ -58,8 +58,8 @@ export function deleteSchedule(id: number) {
     })
 }
 
-export function getSchedulesByUser(user_id: number) {
-    return fetch(`${API_SLAITEIO}/api/schedule/user/${user_id}`, {
+export function getSchedulesByUser(user_email: string) {
+    return fetch(`${API_SLAITEIO}/api/schedule/user/${user_email}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${getToken()}`,

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { loginUser, registerUser } from '@/services';
 
 interface User {
+  email: string;
   token: string;
 }
 
@@ -29,7 +30,7 @@ const useAuthStore = create<AuthState>((set, get) => ({
           throw new Error(data.detail || 'Login failed');
         }
         const { token } = data;
-        set({ user: { token }, loading: false });
+        set({ user: { email: payload.email, token }, loading: false });
         localStorage.setItem('token', token);
       } catch (error: any) {
         set({ loading: false, error: error.message });
