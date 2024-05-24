@@ -3,13 +3,14 @@ import { BsPersonFill } from "react-icons/bs";
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaUnlockKeyhole } from 'react-icons/fa6';
 import 'tailwindcss/tailwind.css';
-import { registerUser } from '@/services';
+import useAuthStore from '@/store/authStore';
 
 export default function Register() {
 
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const register = useAuthStore((state) => state.register);
 
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ export default function Register() {
       password
     }
 
-    await registerUser(payload);
+    await register(payload);
   }
 
   return (

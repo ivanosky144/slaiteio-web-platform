@@ -2,12 +2,13 @@ import 'tailwindcss/tailwind.css';
 import { AiOutlineMail } from "react-icons/ai";
 import { FaUnlockKeyhole } from "react-icons/fa6";
 import { useState } from 'react';
-import { loginUser } from '@/services';
+import useAuthStore from '@/store/authStore';
 
 export default function Login() {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const login = useAuthStore((state) => state.login);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ export default function Login() {
       email,
       password
     }
-    await loginUser(payload);
+    await login(payload);
   }
 
   return (
