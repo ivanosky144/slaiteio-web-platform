@@ -4,16 +4,19 @@ import { FaUnlockKeyhole } from "react-icons/fa6";
 import { useState } from 'react';
 import useAuthStore from '@/store/authStore';
 import { useRouter } from 'next/router';
+import Spinner from '@/components/Spinner';
 
 export default function Login() {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const login = useAuthStore((state) => state.login);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const payload = {
       email,
       password
@@ -52,9 +55,9 @@ export default function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white rounded-2xl py-4 mt-10 bg-gradient-to-br from-[#ade25d] to-[#00FFFF] font-bold hover:scale-105"
+            className="w-full bg-blue-500 text-white rounded-2xl py-4 mt-10 bg-gradient-to-br from-[#ade25d] to-[#00FFFF] font-bold hover:scale-105 flex justify-center"
           >
-            LOGIN
+            {isLoading ? <Spinner /> : 'LOGIN'}
           </button>
           <div className="flex justify-between">
             <span className='text-green-400 font-semibold cursor-pointer'>Forgot your password ?</span>

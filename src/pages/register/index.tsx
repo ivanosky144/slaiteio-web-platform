@@ -4,16 +4,19 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { FaUnlockKeyhole } from 'react-icons/fa6';
 import 'tailwindcss/tailwind.css';
 import useAuthStore from '@/store/authStore';
+import Spinner from '@/components/Spinner';
 
 export default function Register() {
 
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const register = useAuthStore((state) => state.register);
 
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const payload = {
       username,
       email,
@@ -63,9 +66,9 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white rounded-2xl py-4 mt-10 bg-gradient-to-br from-[#ade25d] to-[#00FFFF] font-bold hover:scale-105"
+            className="w-full bg-blue-500 text-white rounded-2xl py-4 mt-10 bg-gradient-to-br from-[#ade25d] to-[#00FFFF] font-bold hover:scale-105 flex justify-center"
           >
-            REGISTER
+            {isLoading ? <Spinner /> : 'REGISTER'}
           </button>
         </form>
       </div>
