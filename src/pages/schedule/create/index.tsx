@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css';
 import 'tailwind-scrollbar';
 
-import MenuPanel from '@/components/MenuPanel';
+import MenuPanel from '@/components/SchedulePanel';
 import ScheduleForm from '@/components/ScheduleForm';
 import { createSchedule } from '@/services';
 

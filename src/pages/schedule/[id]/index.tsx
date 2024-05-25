@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css';
 import 'tailwind-scrollbar';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
-import MenuPanel from '@/components/MenuPanel';
+import MenuPanel from '@/components/SchedulePanel';
 import { PiPencilSimpleLineFill } from "react-icons/pi";
 import { FaTasks } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";

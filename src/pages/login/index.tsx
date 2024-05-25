@@ -22,7 +22,7 @@ export default function Login() {
       password
     }
     await login(payload);
-    router.push('/schedule');
+    router.push('/home');
   }
 
   return (
