@@ -3,12 +3,14 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FaUnlockKeyhole } from "react-icons/fa6";
 import { useState } from 'react';
 import useAuthStore from '@/store/authStore';
+import { useRouter } from 'next/router';
 
 export default function Login() {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const login = useAuthStore((state) => state.login);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ export default function Login() {
       password
     }
     await login(payload);
+    router.push('/schedule');
   }
 
   return (

@@ -6,8 +6,10 @@ import MenuPanel from '@/components/MenuPanel';
 import { PiPencilSimpleLineFill } from "react-icons/pi";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { useState } from 'react';
+import useAuthStore from '@/store/authStore';
 
 export default function Schedules() {
+
 
   return (
     <div className="min-h-screen flex relative">
