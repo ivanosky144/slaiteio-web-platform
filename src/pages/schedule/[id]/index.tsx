@@ -77,15 +77,23 @@ export default function Schedule() {
       <div className="flex-grow max-h-[100vh] overflow-auto px-10 py-20">
         {scheduleData && (
           <>
-            <h1 className='text-3xl font-bold mb-5'>{scheduleData?.data?.name}</h1>
+            <div className='flex justify-between mb-10'>
+              <h1 className='text-3xl font-bold mb-5'>{scheduleData?.data?.name}</h1>
+              <button 
+                className='bg-[#008080] rounded-xl shadow-md p-4 cursor-pointer hover:scale-105 hover:opacity-90 text-white font-bold text-xl'
+                onClick={() => router.push(`/schedule/update/${Number(schedule_id)}`)}
+              >
+                Edit this schedule
+              </button>
+            </div>
             <FullCalendar 
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
               events={scheduleData?.activites?.map((activity: any) => ({
-                title: activity.type === 'TASK' ? activity.task.name : activity.event.title,
+                title: activity.type === 'TASK' ? activity?.metadata?.name : activity?.metadata?.title,
                 date: activity.date,
                 type: activity.type,
-                metadata: activity.type === 'TASK' ? activity.task : activity.event  
+                metadata: activity.metadata
               }))}
               eventContent={renderEventContent} 
             />

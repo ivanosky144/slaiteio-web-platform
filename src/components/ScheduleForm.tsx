@@ -5,13 +5,15 @@ import EventForm from '@/components/EventForm';
 import { FaPlus, FaTasks } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
 import dummyData from '@/data/dummyData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getScheduleDetail } from '@/services';
 
 interface ScheduleFormProps {
+    id?: number | null
     submitHandler: (payload: any) => void
 }
 
-export default function ScheduleForm({ submitHandler}: ScheduleFormProps) {
+export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormProps) {
     const [openActivityTypeOptions, setOpenActivityTypeOptions] = useState<boolean>(false);
     const [openForm, setOpenForm] = useState<string>("");
     const [name, setName] = useState<string>("");
@@ -37,9 +39,21 @@ export default function ScheduleForm({ submitHandler}: ScheduleFormProps) {
             name: name,
             activities: activities
         }
-
         submitHandler(payload)
     }
+
+    const getData = async () => {
+        if (id) {
+            const response = await getScheduleDetail(id);
+            const data = await response.json();
+            setName(data?.data?.name);
+            setActivities(data?.activites);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, [id])
 
     return (
         <form className="p-10 rounded-xl shadow-2xl w-[50vw] flex" onSubmit={handleSubmit}>
@@ -48,6 +62,7 @@ export default function ScheduleForm({ submitHandler}: ScheduleFormProps) {
                     type="text" 
                     placeholder='Add title' 
                     className='outline-none text-4xl font-semibold'
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <hr />  
