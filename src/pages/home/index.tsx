@@ -1,6 +1,8 @@
 import ActivityDetail from "@/components/ActivityDetail";
 import Panel from "@/components/Panel";
-import { getEventsByUser, getTasksByUser } from "@/services";
+import { IoSearchSharp } from "react-icons/io5";
+
+import { getEventsByUser, getTasksByUser, getSchedulesByUser } from "@/services";
 import useAuthStore from "@/store/authStore";
 import { useEffect, useState } from "react";
 
@@ -13,6 +15,8 @@ export default function Homepage() {
     const [openDetail, setOpenDetail] = useState<boolean>(false);
     const [activityId, setActivityId] = useState<number>();
     const [activityType, setActivityType] = useState<string>("");
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [searchResults, setSearchResults] = useState<any>();
     const email = String(user?.email);
 
     const getTasks = async () => {
@@ -54,6 +58,25 @@ export default function Homepage() {
         setOpenDetail(true);
     }
 
+    const getSearchResults = async (query: string) => {
+        if (query) {
+            const response = await getSchedulesByUser(email, query);
+            const data = await response.json();
+            setSearchResults(data?.data);
+        } else {
+            setSearchResults([]);
+        }
+    }
+
+    const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+    }
+
+    useEffect(() => {
+        getSearchResults(searchQuery);
+    }, [searchQuery]);
+
     return (
         <div className="flex">
             <Panel />
@@ -63,7 +86,24 @@ export default function Homepage() {
                         <h1 className="text-6xl font-bold">Welcome, <span className="text-[#008080]">Ivan</span></h1>
                         <p className="font-semibold text-[#008080] text-2xl">Here's your schedule today</p>
                     </div>
-                    <input type="text" className="bg-gray-200 outline-none p-4 rounded-md h-[50%] w-[40%]"/>
+                    <div className="relative flex items-center bg-gray-200 outline-none p-4 rounded-md h-[50%] w-[40%]">
+                        <IoSearchSharp />
+                        <input 
+                            type="text" 
+                            className="bg-gray-200 outline-none p-4 rounded-md h-[50%] w-[40%] font-semibold"
+                            placeholder="Search for schedules"
+                            onChange={handleSearch}
+                        />
+                        {searchQuery && searchResults.length > 0 && (
+                            <div className="absolute top-full w-full z-10 rounded-md bg-white shadow-md mt-2">
+                                {searchResults.map((result: any) => (
+                                    <div className="p-3 hover:bg-gray-100 cursor-pointer" key={result.id}>
+                                        <h3>{result.name}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className="flex gap-10 w-[100%] h-[60%]">
                     <div className="bg-white rounded-xl p-4 shadow-md w-[100%]">
