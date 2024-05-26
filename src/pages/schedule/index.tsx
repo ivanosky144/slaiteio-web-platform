@@ -74,12 +74,15 @@ export default function Schedules() {
             <FullCalendar 
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
-              events={schedules?.flatMap((schedule: any) => schedule.activities.map((activity: any) => ({
-                title: activity.type === 'TASK' ? activity.metadata.name : activity.metadata.title,
-                date: activity.date,
-                type: activity.type,
-                metadata: activity.metadata
-              })))}
+              events={schedules.flatMap((schedule: any) => 
+                schedule.activities.map((activity: any) => ({
+                  title: activity.type === 'TASK' ? activity.metadata.name : activity.metadata.title,
+                  date: activity.date,
+                  type: activity.type,
+                  metadata: activity.metadata,
+                  color: schedule.schedule.color || '#0000FF', // Use schedule's color or default to blue
+                }))
+              )}
               eventContent={renderEventContent} 
             />
           </>

@@ -94,8 +94,9 @@ export default function Schedule() {
                 title: activity.type === 'TASK' ? activity?.metadata?.name : activity?.metadata?.title,
                 date: activity.date,
                 type: activity.type,
-                metadata: activity.metadata
+                metadata: activity.metadata,
               }))}
+              eventColor={scheduleData?.data?.color}
               eventContent={renderEventContent} 
             />
           </>

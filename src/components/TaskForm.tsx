@@ -19,7 +19,7 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
     const [detail, setDetail] = useState<string>("");
     const [time, setTime] = useState<string>("00:00");
     const [date, setDate] = useState<string>("");
-    const [repeatInterval, setRepeatInterval] = useState<string>("");
+    const [repeatInterval, setRepeatInterval] = useState<string>("Once");
     const [openNotificationOptions, setOpenNotificationOptions] = useState<boolean>(false);
     const [notifications, setNotifications] = useState<Notification[]>([]);
 

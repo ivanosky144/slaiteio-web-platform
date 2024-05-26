@@ -4,7 +4,7 @@ import EventForm from '@/components/EventForm';
 
 import { FaPlus, FaTasks } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
-import dummyData from '@/data/dummyData';
+import { HexColorPicker } from 'react-colorful';
 import { useEffect, useState } from 'react';
 import { getScheduleDetail } from '@/services';
 
@@ -17,6 +17,7 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
     const [openActivityTypeOptions, setOpenActivityTypeOptions] = useState<boolean>(false);
     const [openForm, setOpenForm] = useState<string>("");
     const [name, setName] = useState<string>("");
+    const [color, setColor] = useState<string>("#0000FF");
     const [activities, setActivities] = useState<any>([]);
     
     const handleOpenForm = (formType: string) => () => {
@@ -37,7 +38,8 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
         const payload = {
             user_id: 1,
             name: name,
-            activities: activities
+            activities: activities,
+            color: color
         }
         submitHandler(payload)
     }
@@ -56,8 +58,9 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
     }, [id])
 
     return (
-        <form className="relative p-10 rounded-xl shadow-2xl w-[50vw] flex" onSubmit={handleSubmit}>
+        <form className="relative p-5 rounded-xl shadow-2xl w-[50vw] h-[90vh] flex" onSubmit={handleSubmit}>
             <div className='flex flex-col gap-5 flex-3 overflow-y'>
+                <div className='flex flex-col justify-between gap-4'>
                 <input 
                     type="text" 
                     placeholder='Add title' 
@@ -65,9 +68,16 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+                <div className="flex items-center gap-3">
+                    <HexColorPicker color={color} onChange={setColor} className="w-16 h-16" />
+                </div>
+                <div className="flex items-center gap-3">
+                    <span className='font-bold'>Selected color: </span>
+                    <div className="w-8 h-8 rounded-full bg-gray-300" style={{ backgroundColor: color }}></div>
+                </div>
                 <hr />  
                 <span 
-                    className='text-left font-bold text-white bg-[#008080] w-[10vw] p-2 rounded-md flex items-center gap-5 cursor-pointer mt-5 hover:scale-105'
+                    className='text-left font-bold text-white bg-[#008080] w-[10vw] p-2 rounded-md flex items-center gap-5 cursor-pointer mt-2 hover:scale-105'
                     onClick={() => setOpenActivityTypeOptions(!openActivityTypeOptions)}
                 >
                     <FaPlus className='text-white font-bold'/>
@@ -86,10 +96,11 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
                     </div>
                 )}
                 <hr />
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 max-h-[20%]'>
                     {activities?.map((data: any, index: any) => (
                         <ActivityCard key={index} type={data.type} metadata={data.metadata} />
                     ))}
+                </div>
                 </div>
                 <div className="flex justify-between mt-24">
                     <button className='rounded-md py-3 px-2 w-[25%] bg-gray-200 text-black font-bold hover:scale-105'>Delete</button>
