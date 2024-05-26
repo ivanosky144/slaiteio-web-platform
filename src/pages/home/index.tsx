@@ -2,7 +2,7 @@ import ActivityDetail from "@/components/ActivityDetail";
 import Panel from "@/components/Panel";
 import { IoSearchSharp } from "react-icons/io5";
 
-import { getEventsByUser, getTasksByUser, getSchedulesByUser } from "@/services";
+import { getEventsByUser, getTasksByUser, getSchedulesByUser, getUserDetail } from "@/services";
 import useAuthStore from "@/store/authStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ export default function Homepage() {
     const router = useRouter();
     const [tasks, setTasks] = useState<any>();
     const [events, setEvents] = useState<any>();
+    const [userDetail, setUserDetail] = useState<any>();
     const [openDetail, setOpenDetail] = useState<boolean>(false);
     const [activityId, setActivityId] = useState<number>();
     const [activityType, setActivityType] = useState<string>("");
@@ -33,9 +34,16 @@ export default function Homepage() {
         setEvents(data);
     }
 
+    const getUser = async () => {
+        const response = await getUserDetail(email);
+        const data = await response.json();
+        setUserDetail(data?.data);
+    }
+
     useEffect(() => {
         getTasks();
         getEvents();
+        getUser();
     }, [user]);
 
     const formatDate = (date: string) => {
@@ -85,7 +93,7 @@ export default function Homepage() {
             <div className="p-10 w-[100%] bg-gray-50 flex flex-col gap-20">
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-6xl font-bold">Welcome, <span className="text-[#008080]">Ivan</span></h1>
+                        <h1 className="text-6xl font-bold">Welcome, <span className="text-[#008080]">{userDetail?.username}</span></h1>
                         <p className="font-semibold text-[#008080] text-2xl">Here's your schedule today</p>
                     </div>
                     <div className="relative flex items-center bg-gray-200 outline-none p-4 rounded-md h-[50%] w-[40%]">

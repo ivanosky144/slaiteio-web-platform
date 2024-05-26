@@ -209,3 +209,13 @@ export function getTaskDetail(task_id: number) {
         }
     })
 }
+
+export function getUserDetail(user_email: string) {
+    return fetch(`${API_SLAITEIO}/api/user/${user_email}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}
