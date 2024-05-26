@@ -21,9 +21,7 @@ export default function Panel() {
                     <FaHome className="w-10 h-10 text-white cursor-pointer hover:opacity-90" onClick={() => router.push("/home")}/>
                     <IoCalendar 
                         className="w-10 h-10 text-white cursor-pointer hover:opacity-90" 
-                        onClick={() => router.push("/schedule")}
-                        onMouseEnter={() => setIsCalendarHovered(true)}
-                        onMouseLeave={() => setIsCalendarHovered(false)}
+                        onClick={() => setIsCalendarHovered(!isCalendarHovered)}
                     />
                     <IoIosNotifications className="w-10 h-10 text-white cursor-pointer hover:opacity-90" onClick={() => router.push("/notifications")}/>
                 </div>

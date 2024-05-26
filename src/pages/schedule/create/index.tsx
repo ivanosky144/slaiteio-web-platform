@@ -4,11 +4,15 @@ import 'tailwind-scrollbar';
 import ScheduleForm from '@/components/ScheduleForm';
 import { createSchedule } from '@/services';
 import Panel from '@/components/Panel';
+import { useRouter } from 'next/router';
 
 export default function SchedulesCreate() {
+  
+  const router = useRouter();
 
   const submitHandler = async (payload: any) => {
     await createSchedule(payload);
+    router.push('/schedule');
   }
 
   return (

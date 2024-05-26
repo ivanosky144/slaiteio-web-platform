@@ -5,30 +5,46 @@ import dayGridPlugin from "@fullcalendar/daygrid"
 import SchedulePanel from '@/components/SchedulePanel';
 import { PiPencilSimpleLineFill } from "react-icons/pi";
 import { FaWandMagicSparkles } from "react-icons/fa6";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAuthStore from '@/store/authStore';
 import Panel from '@/components/Panel';
+import { getSchedulesByUser } from '@/services';
+import { useRouter } from 'next/router';
 
 export default function Schedules() {
 
+  const [schedules, setSchedules] = useState<any>(null);
+  const user = useAuthStore((state) => state.user);
+  const router = useRouter();
+  
+  const getData = async () => {
+    const response = await getSchedulesByUser(String(user?.email), undefined, true);
+    const data = await response.json();
+    setSchedules(data?.data);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="min-h-screen flex relative">
       <Panel />
       <div className="fixed bottom-0 right-0 mb-12 mr-12 flex gap-5">
-        <button className='bg-[#008080] rounded-xl shadow-xl p-5 cursor-pointer'>
+        <button className='bg-[#008080] rounded-xl shadow-xl p-5 cursor-pointer hover:scale-105 hover:opacity-90' onClick={() => router.push('/schedule/create')}>
           <PiPencilSimpleLineFill className='w-20 h-20 text-white cursor-pointer'/>
         </button>
-        <button className='bg-[#00b3b3] rounded-xl shadow-xl p-5 cursor-pointer'>
+        <button className='bg-[#00b3b3] rounded-xl shadow-xl p-5 cursor-pointer hover:scale-105 hover:opacity-90'>
           <FaWandMagicSparkles className='w-20 h-20 text-white cursor-pointer'/>
         </button>
       </div>
-      <div className="flex-grow max-h-[100vh] overflow-auto px-10 py-20">
-        <FullCalendar 
+      <div className="flex-grow max-h-[100vh] overflow-auto px-10 py-5">
+        <h1 className='mt-5 mb-10 text-4xl font-bold'>All Schedules</h1>
+        {/* <FullCalendar 
           plugins={[ dayGridPlugin ]}
           initialView="dayGridMonth"
 
-        />
+        /> */}
       </div>
     </div>
   )

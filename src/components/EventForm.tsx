@@ -104,7 +104,7 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
     }
 
     return (
-        <div className='flex-2 bg-slate-50 p-3 rounded-md ml-10 w-[30vw] flex flex-col justify-between'>
+        <div className='flex-2 bg-slate-50 p-3 rounded-md ml-10 w-[30vw] flex flex-col justify-between max-h-[90%] overflow-y-auto overflow-x-hidden'>
             <div className="flex flex-col gap-5 px-3 py-3">
                 <h2 className='font-bold text-xl'>Event: </h2>
                 <input 

@@ -35,7 +35,7 @@ export default function SchedulePanel() {
             <div className='flex flex-col'>
                 <div className="flex items-center bg-green-500 p-5 rounded-xl gap-5 mb-10 hover:scale-105 cursor-pointer">
                     <FaCalendarAlt className='text-white w-5 h-5'/>
-                    <p className='text-white font-semibold text-xl '>All Schedules</p>
+                    <p className='text-white font-semibold text-xl' onClick={() => router.push("/schedule")}>All Schedules</p>
                 </div>
                 <div className='flex flex-col gap-10 text-white text-lg bg-green-500 p-5 rounded-2xl font-bold'>
                     {schedules && (

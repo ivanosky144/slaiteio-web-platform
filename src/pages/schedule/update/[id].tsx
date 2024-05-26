@@ -12,6 +12,7 @@ export default function ScheduleUpdate() {
 
   const submitHandler = async (payload: any) => {
     await updateSchedule(payload, schedule_id);
+    router.push(`/schedule/${schedule_id}`)
   }
 
   return (

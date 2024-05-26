@@ -17,7 +17,7 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
     const [openActivityTypeOptions, setOpenActivityTypeOptions] = useState<boolean>(false);
     const [openForm, setOpenForm] = useState<string>("");
     const [name, setName] = useState<string>("");
-    const [activities, setActivities] = useState(dummyData);
+    const [activities, setActivities] = useState<any>([]);
     
     const handleOpenForm = (formType: string) => () => {
         if (openForm !== formType) {
@@ -87,7 +87,7 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
                 )}
                 <hr />
                 <div className='flex flex-col gap-4'>
-                    {activities?.map((data, index) => (
+                    {activities?.map((data: any, index: any) => (
                         <ActivityCard key={index} type={data.type} metadata={data.metadata} />
                     ))}
                 </div>
