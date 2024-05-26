@@ -162,3 +162,23 @@ export function getNotificationsByActivity(activity_id: number){
         }, 
     })
 }
+
+export function getEventsByUser(user_email: string) {
+    return fetch(`${API_SLAITEIO}/api/event/user/${user_email}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+export function getTasksByUser(user_email: string) {
+    return fetch(`${API_SLAITEIO}/api/task/user/${user_email}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}

@@ -10,6 +10,7 @@ import { FaWandMagicSparkles } from "react-icons/fa6";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getScheduleDetail } from '@/services';
+import Panel from '@/components/Panel';
 
 export default function Schedule() {
 
@@ -65,7 +66,7 @@ export default function Schedule() {
 
   return (
     <div className="min-h-screen flex relative">
-        <MenuPanel />
+        <Panel />
       <div className="fixed bottom-0 right-0 mb-12 mr-12 flex gap-5 z-10">
         <button className='bg-[#008080] rounded-xl shadow-xl p-5 cursor-pointer hover:scale-105 hover:opacity-90' onClick={() => router.push('/schedule/create')}>
           <PiPencilSimpleLineFill className='w-20 h-20 text-white cursor-pointer'/>

@@ -7,13 +7,14 @@ import { PiPencilSimpleLineFill } from "react-icons/pi";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { useState } from 'react';
 import useAuthStore from '@/store/authStore';
+import Panel from '@/components/Panel';
 
 export default function Schedules() {
 
 
   return (
     <div className="min-h-screen flex relative">
-        <SchedulePanel />
+      <Panel />
       <div className="fixed bottom-0 right-0 mb-12 mr-12 flex gap-5">
         <button className='bg-[#008080] rounded-xl shadow-xl p-5 cursor-pointer'>
           <PiPencilSimpleLineFill className='w-20 h-20 text-white cursor-pointer'/>

@@ -21,7 +21,6 @@ export default function SchedulePanel() {
     }
 
     const handleDelete = async (id: number) => {
-        console.log("test")
         await deleteSchedule(id);
         getData();
     }
