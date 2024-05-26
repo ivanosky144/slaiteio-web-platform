@@ -56,7 +56,7 @@ export default function ScheduleForm({ id = null, submitHandler}: ScheduleFormPr
     }, [id])
 
     return (
-        <form className="p-10 rounded-xl shadow-2xl w-[50vw] flex" onSubmit={handleSubmit}>
+        <form className="relative p-10 rounded-xl shadow-2xl w-[50vw] flex" onSubmit={handleSubmit}>
             <div className='flex flex-col gap-5 flex-3 overflow-y'>
                 <input 
                     type="text" 

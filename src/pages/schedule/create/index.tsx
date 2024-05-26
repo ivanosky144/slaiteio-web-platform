@@ -12,7 +12,7 @@ export default function SchedulesCreate() {
   }
 
   return (
-    <div className="min-h-screen flex relative">
+    <div className="min-h-screen flex relative max-h-screen">
       <Panel />
       <div className="py-20 px-20 flex justify-center w-[100vw]">
         <ScheduleForm submitHandler={submitHandler}/>
