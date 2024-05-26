@@ -1,9 +1,9 @@
 import 'tailwindcss/tailwind.css';
 import 'tailwind-scrollbar';
 
-import MenuPanel from '@/components/SchedulePanel';
 import ScheduleForm from '@/components/ScheduleForm';
 import { createSchedule } from '@/services';
+import Panel from '@/components/Panel';
 
 export default function SchedulesCreate() {
 
@@ -13,7 +13,7 @@ export default function SchedulesCreate() {
 
   return (
     <div className="min-h-screen flex relative">
-      <MenuPanel />
+      <Panel />
       <div className="py-20 px-20 flex justify-center w-[100vw]">
         <ScheduleForm submitHandler={submitHandler}/>
       </div>
