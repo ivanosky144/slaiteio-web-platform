@@ -24,7 +24,7 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
     const handleSave = () => {
-        const newTask = {
+        const newTask: any = {
             date: date,
             type: 'TASK',
             repeat_interval: repeatInterval,
@@ -33,11 +33,17 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
                 detail: detail,
                 due_time: time 
             }
+        };
+        
+        if (notifications.length > 0) {
+            newTask.notifications = notifications;
         }
+
         onAddActivity(newTask);
         setName("");
         setDetail("");
         setTime("");
+        setNotifications([]);
     }
 
     const handleAddNotifications = (notification: string) => {
