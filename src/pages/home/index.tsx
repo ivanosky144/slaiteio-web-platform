@@ -1,3 +1,4 @@
+import ActivityDetail from "@/components/ActivityDetail";
 import Panel from "@/components/Panel";
 import { getEventsByUser, getTasksByUser } from "@/services";
 import useAuthStore from "@/store/authStore";
@@ -9,6 +10,9 @@ export default function Homepage() {
     const user = useAuthStore((state) => state.user);
     const [tasks, setTasks] = useState<any>();
     const [events, setEvents] = useState<any>();
+    const [openDetail, setOpenDetail] = useState<boolean>(false);
+    const [activityId, setActivityId] = useState<number>();
+    const [activityType, setActivityType] = useState<string>("");
     const email = String(user?.email);
 
     const getTasks = async () => {
@@ -38,6 +42,18 @@ export default function Homepage() {
         })
     }
 
+    const handleEventDetail = (id: number) => {
+        setActivityId(id);
+        setActivityType("EVENT");
+        setOpenDetail(true);
+    }
+
+    const handleTaskDetail = (id: number) => {
+        setActivityId(id);
+        setActivityType("TASK");
+        setOpenDetail(true);
+    }
+
     return (
         <div className="flex">
             <Panel />
@@ -54,7 +70,10 @@ export default function Homepage() {
                         <h2 className="font-semibold text-xl">Your Events</h2>
                         <div className="flex flex-col gap-3 mt-4">
                             {events?.data?.slice(0,5).map((event: any) => (
-                                <div className="bg-gray-50 p-2 rounded-md shadow-md flex items-center justify-between">
+                                <div 
+                                    className="bg-gray-50 p-2 rounded-md shadow-md flex items-center justify-between cursor-pointer hover:scale-105"
+                                    onClick={() => handleEventDetail(event.id)}
+                                >
                                     <div className="flex flex-col">
                                         <h3 className="font-semibold text-lg">{event.title}</h3>
                                         {event.start_time && (
@@ -64,14 +83,17 @@ export default function Homepage() {
                                     <p className="font-semibold text-lg">{formatDate(event.date)}</p>
                                 </div>
                             ))}
-
                         </div>
+                        {openDetail && <ActivityDetail id={activityId} type={activityType} onClose={() => setOpenDetail(false)}/>}
                     </div>
                     <div className="bg-white rounded-xl p-4 shadow-md w-[100%]">
                         <h2 className="font-semibold text-xl">Your Tasks</h2>
                         <div className="flex flex-col gap-3 mt-4">
                             {tasks?.data?.slice(0,5).map((task: any) => (
-                                <div className="bg-gray-50 p-2 rounded-md shadow-md flex items-center justify-between">
+                                <div 
+                                    className="bg-gray-50 p-2 rounded-md shadow-md flex items-center justify-between cursor-pointer hover:scale-105"
+                                    onClick={() => handleTaskDetail(task.id)}
+                                >
                                     <div className="flex flex-col">
                                         <h3 className="font-semibold text-lg">{task.name}</h3>
                                         {task.due_time && (

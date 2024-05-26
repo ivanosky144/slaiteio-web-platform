@@ -182,3 +182,23 @@ export function getTasksByUser(user_email: string) {
         }
     })
 }
+
+export function getEventDetail(event_id: number) {
+    return fetch(`${API_SLAITEIO}/api/event/${event_id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+export function getTaskDetail(task_id: number) {
+    return fetch(`${API_SLAITEIO}/api/task/${task_id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}
