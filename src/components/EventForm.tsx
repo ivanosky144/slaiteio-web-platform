@@ -33,11 +33,8 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
                 description: description,
                 start_time: startTime,
                 end_time: endTime
-            }
-        }
-
-        if (notifications.length > 0) {
-            newEvent.notifications = notifications;
+            },
+            notifications: notifications
         }
 
         onAddActivity(newEvent);
