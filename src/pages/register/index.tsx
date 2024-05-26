@@ -5,9 +5,11 @@ import { FaUnlockKeyhole } from 'react-icons/fa6';
 import 'tailwindcss/tailwind.css';
 import useAuthStore from '@/store/authStore';
 import Spinner from '@/components/Spinner';
+import { useRouter } from 'next/router';
 
 export default function Register() {
 
+  const router = useRouter();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -24,11 +26,12 @@ export default function Register() {
     }
 
     await register(payload);
+    router.push('/login');
   }
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-gradient-to-br shadow-xl rounded-lg from-[#ade25d] to-[#00ffff] h-[75vh] w-[25vw]"></div>
+      <div className="bg-[#008080] shadow-xl rounded-lg h-[75vh] w-[25vw]"></div>
       <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center h-[75vh] w-[25vw] justify-center">
         <h1 className="text-3xl font-bold mb-10 text-slate-500">Sign Up</h1>
         <form className="space-y-4 w-full flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -66,7 +69,7 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white rounded-2xl py-4 mt-10 bg-gradient-to-br from-[#ade25d] to-[#00FFFF] font-bold hover:scale-105 flex justify-center"
+            className="w-full text-white rounded-2xl py-4 mt-10 bg-[#008080] font-bold hover:scale-105 flex justify-center"
           >
             {isLoading ? <Spinner /> : 'REGISTER'}
           </button>

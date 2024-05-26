@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   useEffect(() => {
-    if (!isLoggedIn && router.pathname !== '/login') {
+    if (!isLoggedIn && router.pathname !== '/login' && router.pathname !== '/register') {
       router.push('/login');
     } 
   }, [isLoggedIn, router])
