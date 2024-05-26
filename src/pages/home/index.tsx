@@ -5,11 +5,13 @@ import { IoSearchSharp } from "react-icons/io5";
 import { getEventsByUser, getTasksByUser, getSchedulesByUser } from "@/services";
 import useAuthStore from "@/store/authStore";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 
 export default function Homepage() {
 
     const user = useAuthStore((state) => state.user);
+    const router = useRouter();
     const [tasks, setTasks] = useState<any>();
     const [events, setEvents] = useState<any>();
     const [openDetail, setOpenDetail] = useState<boolean>(false);
@@ -97,7 +99,11 @@ export default function Homepage() {
                         {searchQuery && searchResults.length > 0 && (
                             <div className="absolute top-full w-full z-10 rounded-md bg-white shadow-md mt-2">
                                 {searchResults.map((result: any) => (
-                                    <div className="p-3 hover:bg-gray-100 cursor-pointer" key={result.id}>
+                                    <div 
+                                        className="p-3 hover:bg-gray-100 cursor-pointer" 
+                                        key={result.id}
+                                        onClick={() => router.push(`/schedule/${result.id}`)}
+                                    >
                                         <h3>{result.name}</h3>
                                     </div>
                                 ))}
