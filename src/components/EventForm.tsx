@@ -141,7 +141,7 @@ export default function EventForm({ onAddActivity }: EventFormProps) {
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none'
                     onChange={(e) => setRepeatInterval(e.target.value)}
                 >
-                    <option value="None" className='bg-slate-100 font-semibold'>Does not repeat</option>
+                    <option value="Once" className='bg-slate-100 font-semibold'>Does not repeat</option>
                     <option value="Daily">Every day</option>
                     <option value="Weekly">Every week</option>
                     <option value="Monthly">Every month</option>

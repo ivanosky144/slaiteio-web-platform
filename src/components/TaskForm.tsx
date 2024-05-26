@@ -32,12 +32,9 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
                 name: name,
                 detail: detail,
                 due_time: time 
-            }
+            },
+            notifications: notifications
         };
-        
-        if (notifications.length > 0) {
-            newTask.notifications = notifications;
-        }
 
         onAddActivity(newTask);
         setName("");
@@ -138,7 +135,7 @@ export default function TaskForm({ onAddActivity }: TaskFormProps) {
                     className='bg-slate-100 font-semibold text-black h-16 p-2 outline-none cursor-pointer'
                     onChange={(e) => setRepeatInterval(e.target.value)}
                 >
-                    <option value="None" className='bg-slate-100 font-semibold'>Does not repeat</option>
+                    <option value="Once" className='bg-slate-100 font-semibold'>Does not repeat</option>
                     <option value="Daily">Every day</option>
                     <option value="Weekly">Every week</option>
                     <option value="Monthly">Every month</option>
